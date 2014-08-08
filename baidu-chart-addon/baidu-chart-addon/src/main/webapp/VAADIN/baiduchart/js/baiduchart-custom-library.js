@@ -2,7 +2,7 @@
 var mylibrary = mylibrary || {};
 mylibrary.MyComponent = function(element) {
 	// Set up the content
-	element.innerHTML = "<div id='main' style='height:400px; width:100%'></div>";
+	element.innerHTML = "<div id='main' style='height:200px; width:100%'></div>";
 	
 	// Style it
 	element.style.border = "thin solid red";
@@ -23,6 +23,7 @@ mylibrary.MyComponent = function(element) {
         });
         // 3. ajax getting the data from backend
         var option = eval('('+ value + ')'); // from JSON string to JSON object
+        myChart.setTheme("dark");
         // 4. ajax callback
         myChart.hideLoading();	                    
         // 5. 为echarts对象加载数据 
