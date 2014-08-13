@@ -89,9 +89,10 @@ public class DemoUI extends UI {
             comboxTheme.addValueChangeListener(new Property.ValueChangeListener() {
                 @Override
                 public void valueChange(Property.ValueChangeEvent event) {
-                    final WorkflowDummy workflow = (WorkflowDummy)event.getProperty().getValue();
-                    Notification.show(workflow.getName());
+                    final BaiduChartTheme theme = (BaiduChartTheme)event.getProperty().getValue();
+                    Notification.show(theme.getName());
                     //TODO
+                    baiduChart.setTheme(theme);
                 }
             });
             vlayout.addComponent(comboxTheme);
