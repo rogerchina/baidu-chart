@@ -1,0 +1,8 @@
+#baiduchart{
+	height: 250px;
+	width: 100%;
+	border: thin solid #c2d7e6;
+	border-top-color: #c8dfed;
+	border-bottom-color: #a0c5dc;
+	display: inline-block;
+}

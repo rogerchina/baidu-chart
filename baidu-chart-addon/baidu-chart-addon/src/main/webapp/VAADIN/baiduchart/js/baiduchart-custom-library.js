@@ -1,12 +1,14 @@
 // Define the namespace
 var mylibrary = mylibrary || {};
-mylibrary.MyComponent = function(element) {
+mylibrary.BaiduChartComponent = function(element) {
 	// Set up the content
-	element.innerHTML = "<div id='main' style='height:200px; width:100%'></div>";
+	element.innerHTML = "<div id='baiduchart'></div>";
 	
 	// Style it
-	element.style.border = "thin solid red";
-	element.style.display = "inline-block";
+//	element.style.border = "thin solid #c2d7e6";
+//	element.style.borderTopColor = "#c8dfed";
+//	element.style.borderBottomColor = "#a0c5dc";
+//	element.style.display = "inline-block";
 	
 	// Getter and setter for the value property
 	this.getValue = function() {
@@ -14,21 +16,19 @@ mylibrary.MyComponent = function(element) {
 	};
 	
 	this.setValue = function(value) {
-        // 1.基于准备好的dom，初始化echarts图表
-    	// srcipt标签式引入
-        var myChart = echarts.init(document.getElementById('main')); 
-        // 2. 过度...
+    	// 1. init the chart
+        var myChart = echarts.init(document.getElementById('baiduchart')); 
+        // 2. show loading
         myChart.showLoading({
-            text: 'Loading...',    //loading话术
+            text: 'Loading...',
         });
         // 3. ajax getting the data from backend
         var option = eval('('+ value + ')'); // from JSON string to JSON object
         myChart.setTheme("dark");
         // 4. ajax callback
         myChart.hideLoading();	                    
-        // 5. 为echarts对象加载数据 
+        // 5. set up the myChart object with option data
         myChart.setOption(option); 
-		        
 	};
 	
 	// Default implementation of the click handler
