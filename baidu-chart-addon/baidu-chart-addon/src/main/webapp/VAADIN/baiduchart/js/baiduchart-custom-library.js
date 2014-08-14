@@ -2,7 +2,7 @@
 var mylibrary = mylibrary || {};
 mylibrary.BaiduChartComponent = function(element) {
 	// Set up the content
-	element.innerHTML = "<div id='baiduchart'></div>";
+	element.innerHTML = "<div id='baiduchart' style='height:250px;'></div>";
 	
 	// Style it
 	element.style.border = "thin solid #c2d7e6";

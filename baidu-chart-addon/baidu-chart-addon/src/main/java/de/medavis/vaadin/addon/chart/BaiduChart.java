@@ -9,14 +9,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import com.vaadin.annotations.JavaScript;
-import com.vaadin.annotations.StyleSheet;
 import com.vaadin.ui.AbstractJavaScriptComponent;
 import com.vaadin.ui.JavaScriptFunction;
 
 @JavaScript({"vaadin://baiduchart/js/echarts-plain.js", 
     "vaadin://baiduchart/js/baiduchart-custom-library.js", 
     "baiduchart-connector.js"})
-@StyleSheet({"vaadin://baiduchart/theme/baiduchart-themes.css"})
 public class BaiduChart extends AbstractJavaScriptComponent {
 
     private static final long serialVersionUID = -9130987146148572563L;
