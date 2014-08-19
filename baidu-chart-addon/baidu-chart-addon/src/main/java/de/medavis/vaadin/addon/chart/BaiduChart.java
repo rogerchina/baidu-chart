@@ -62,7 +62,7 @@ public class BaiduChart extends AbstractJavaScriptComponent {
                 + "tooltip:{trigger:'axis'},"
                 + "legend:{data:[" + toStringFromArray(legendData) + "]},"
                 + "toolbox:{"
-                    + "show:true,"
+                    + "show:false,"
                     + "feature:{"
                         + "mark:{show:true, title:'Assistant line mark'},"
                         + "dataView:{show:true,title:'Data view',readOnly:false},"
