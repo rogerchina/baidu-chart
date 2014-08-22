@@ -4,6 +4,7 @@ package de.medavis.vaadin.addon.baiduchart.demo;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,13 +18,14 @@ import com.vaadin.server.Page;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.ComboBox;
-import com.vaadin.ui.Label;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 import de.medavis.vaadin.addon.chart.BaiduChart;
 import de.medavis.vaadin.addon.chart.BaiduChartTheme;
+import de.medavis.vaadin.addon.chart.Point;
 
 
 @Theme("demo")
@@ -99,6 +101,7 @@ public class DemoUI extends UI {
             
             // display by default
             showChart("ris_his");
+            showChart("ris_his");
             
             setContent(vlayout);
         } catch(Exception ex) {
@@ -107,32 +110,59 @@ public class DemoUI extends UI {
     }
     
     private void showChart(String titleName){
-        // legend
-        String legend[] = {"Received Message", "Sent Message"};
-        // xAxis 
-        String xAxis[] = {"Jan.","Feb.","Mar.","Apr.","May.","Jun.","Jul.","Aug.","Sep.","Oct.","Nov.","Dec."};
+//        // legend
+//        String legend[] = {"Received Message", "Sent Message"};
+//        // xAxis 
+//        String xAxis[] = {"Jan.","Feb.","Mar.","Apr.","May.","Jun.","Jul.","Aug.","Sep.","Oct.","Nov.","Dec."};
+//        
+//        // series 1
+//        List<String> list = new ArrayList<>();
+//        list.add("800");list.add("200");list.add("1000");list.add("0");
+//        list.add("0");list.add("0");list.add("100");list.add("900");
+//        list.add("1000");list.add("0");list.add("0");list.add("800");
+//        // series 2
+//        List<String> list1 = new ArrayList<>();
+//        list1.add("800");list1.add("200");list1.add("1000");list1.add("0");
+//        list1.add("0");list1.add("0");list1.add("100");list1.add("900");
+//        list1.add("1000");list1.add("0");list1.add("0");list1.add("800");
+//        // series data
+//        Map<String, List<String>> map = new HashMap<>();
+//        map.put("Received Message",list);
+//        map.put("Sent Message", list1);
+//
+//        // set json data
+//        baiduChart = new BaiduChart();
+//        baiduChart.setSizeFull();
+//        baiduChart.setTheme(BaiduChartTheme.DARK);
+//        baiduChart.setValue(baiduChart.setJsonOption(titleName, legend, xAxis, map));
         
-        // series 1
-        List<String> list = new ArrayList<>();
-        list.add("800");list.add("200");list.add("1000");list.add("0");
-        list.add("0");list.add("0");list.add("100");list.add("900");
-        list.add("1000");list.add("0");list.add("0");list.add("800");
-        // series 2
-        List<String> list1 = new ArrayList<>();
-        list1.add("800");list1.add("200");list1.add("1000");list1.add("0");
-        list1.add("0");list1.add("0");list1.add("100");list1.add("900");
-        list1.add("1000");list1.add("0");list1.add("0");list1.add("800");
-        // series data
-        Map<String, List<String>> map = new HashMap<>();
-        map.put("Received Message",list);
-        map.put("Sent Message", list1);
-
-        // set json data
-        baiduChart = new BaiduChart();
+        
+        Map<String, List<Point>> tempMap = new LinkedHashMap<>();
+        
+        // if dataMap is empty, set default value
+        List<Point> pointList = new ArrayList<>();
+        Point point = null;
+        for(int i=0; i<10; i++){
+            point = new Point();
+            point.setX("0");
+            point.setY(9);
+            pointList.add(point);
+        }
+        tempMap.put("", pointList);
+        
+        BaiduChart baiduChart = new BaiduChart();
         baiduChart.setSizeFull();
-        baiduChart.setTheme(BaiduChartTheme.DARK);
-        baiduChart.setValue(baiduChart.setJsonOption(titleName, legend, xAxis, map));
+        try {
+            baiduChart.setValue(baiduChart.setJsonOption1(titleName, tempMap));
+        } catch(Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
        
+//        HorizontalLayout hlayout = new HorizontalLayout();
+//        hlayout.addComponent(baiduChart);
+//        
+//        vlayout.addComponent(hlayout);
         vlayout.addComponent(baiduChart);
     }
     
