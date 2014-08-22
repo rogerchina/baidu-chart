@@ -2,6 +2,7 @@ package de.medavis.vaadin.addon.chart;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,25 +43,52 @@ public class BaiduChart extends AbstractJavaScriptComponent {
         });
     }
     
-    public String setJsonOption(String title, String[] legendData, String[] xAxisData, Map<String, List<String>> seriesMap){
-        String jsonData = new String();
-        // config info for chart
-        StringBuilder series = new StringBuilder();
+    public String setJsonOption(String title, Map<String, List<Point>> dataMap){
+        // convert dataMap into stringMap
+        List<String> xAxisList = new ArrayList<>();
+        Map<String, List<String>> stringMap = new LinkedHashMap<>();
+        List<String> stringList = null;
+        List<Point> pointList = null;
+        for(String key : dataMap.keySet()){
+            pointList = dataMap.get(key);
+            stringList = new ArrayList<>();
+            for(Point point : pointList){
+                stringList.add(point.getY().toString());
+            }
+            stringMap.put(key, stringList);
+        }
         
-        // fill the json data
-        // 1. set series data
+        for(String key : dataMap.keySet()){
+            List<Point> pointListTemp = dataMap.get(key);
+            for(Point point : pointListTemp){
+                xAxisList.add(point.getX());
+            }
+            break;
+        }
+
+        // json data
+        String jsonData = new String();
+        // legend data
+        String [] legend = (String[])dataMap.keySet().toArray(new String[0]);
+        // x axis data
+        String[] xAxis = (String[])xAxisList.toArray(new String[0]);
+        // y axis data
+        StringBuilder series = new StringBuilder();
         series.append("series:[");
-        for(String str : seriesMap.keySet()){
-            series.append("{name:'" + str + "',type:'bar',itemStyle:{normal:{color:'blue'}},data:" + seriesMap.get(str).toString() + ",markPoint:{data:[{type:'max',name:'Max value'},{type:'min',name:'Min value'}]},markLine:{data:[{type:'average',name:'Average value'}]}},");
+        for(String str : stringMap.keySet()){
+            series.append("{name:'" + str + "',"
+                    + "type:'bar',"
+                    + "itemStyle:{normal:{color:'rgb(32, 80, 129)'}},"
+                    + "data:" + stringMap.get(str).toString() + ","
+                    + "markPoint:{data:[{type:'max',name:'Max value'},{type:'min',name:'Min value'}]},markLine:{data:[{type:'average',name:'Average value'}]}},");
         }
         series = new StringBuilder(series.substring(0, series.length()-1));
         series.append("]");
         
-        // 2. set the json string
         jsonData = "{"
                 + "title:{text:'" + title + "'},"
                 + "tooltip:{trigger:'axis'},"
-                + "legend:{data:[" + toStringFromArray(legendData) + "]},"
+                + "legend:{data:[" + toStringFromArray(legend) + "]},"
                 + "toolbox:{"
                     + "show:false,"
                     + "feature:{"
@@ -70,7 +98,7 @@ public class BaiduChart extends AbstractJavaScriptComponent {
                         + "restore:{show:true,title:'restore'},"
                         + "saveAsImage:{show:true,title:'saveAsImage'}}},"
                 + "calculable:true,"
-                + "xAxis:[{type:'category',data:[" + toStringFromArray(xAxisData) + "]}],"
+                + "xAxis:[{type:'category',data:[" + toStringFromArray(xAxis) + "]}],"
                 + "yAxis:[{type:'value'}]," + series.toString() + "}";
         return jsonData;
     }

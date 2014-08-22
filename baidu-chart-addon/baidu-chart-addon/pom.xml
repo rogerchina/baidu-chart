@@ -22,7 +22,7 @@
         <Implementation-Title>Codemirror Add-on</Implementation-Title>
         <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
         <Vaadin-License-Title>Apache License 2.0</Vaadin-License-Title>
-        <Vaadin-Addon>${artifactId}.jar</Vaadin-Addon>
+        <Vaadin-Addon>${project.artifactId}.jar</Vaadin-Addon>
     </properties>
 
     <repositories>
