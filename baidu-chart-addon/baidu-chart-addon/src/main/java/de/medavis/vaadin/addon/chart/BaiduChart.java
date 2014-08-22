@@ -51,7 +51,7 @@ public class BaiduChart extends AbstractJavaScriptComponent {
         // 1. set series data
         series.append("series:[");
         for(String str : seriesMap.keySet()){
-            series.append("{name:'" + str + "',type:'bar',data:" + seriesMap.get(str).toString() + ",markPoint:{data:[{type:'max',name:'Max value'},{type:'min',name:'Min value'}]},markLine:{data:[{type:'average',name:'Average value'}]}},");
+            series.append("{name:'" + str + "',type:'bar',itemStyle:{normal:{color:'blue'}},data:" + seriesMap.get(str).toString() + ",markPoint:{data:[{type:'max',name:'Max value'},{type:'min',name:'Min value'}]},markLine:{data:[{type:'average',name:'Average value'}]}},");
         }
         series = new StringBuilder(series.substring(0, series.length()-1));
         series.append("]");
