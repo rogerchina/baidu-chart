@@ -1,8 +1,8 @@
 // Define the namespace
 var mylibrary = mylibrary || {};
-mylibrary.BaiduChartComponent = function(element) {
+mylibrary.BaiduChartComponent = function(element, id) {
 	// Set up the content
-	element.innerHTML = "<div id='baiduchart' style='height:250px;'></div>";
+	element.innerHTML = "<div id='baiduchart" + id + "' style='height:250px;'></div>";
 	
 	// Style it
 	element.style.border = "thin solid #c2d7e6";
@@ -18,7 +18,7 @@ mylibrary.BaiduChartComponent = function(element) {
 	var myChart;
 	this.setValue = function(value) {
     	// 1. init the chart
-        myChart = echarts.init(document.getElementById('baiduchart')); 
+        myChart = echarts.init(document.getElementById('baiduchart' + id)); 
         // 2. show loading
         myChart.showLoading({
             text: 'Loading...',
@@ -40,13 +40,6 @@ mylibrary.BaiduChartComponent = function(element) {
 	this.setTheme = function(theme){
 		myChart.setTheme(theme);
 	}
-	
-	// Set up button click
-//	var button = element.getElementsByTagName("input")[1];
-//	var self = this; // Can't use this inside the function
-//	button.onclick = function() {
-//		self.click();
-//	};
 };
 
 
