@@ -12,7 +12,7 @@ mylibrary.BaiduChartComponent = function(element, id) {
 	
 	// Getter and setter for the value property
 	this.getValue = function() {
-		//return element.getElementsByTagName("input")[0].value;
+		//return element.getElementsById("baiduchart-auto-refresh"+ id).value;
 	};
 	
 	var myChart;
