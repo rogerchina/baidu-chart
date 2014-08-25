@@ -2,6 +2,7 @@ package de.medavis.vaadin.addon.chart;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,13 +75,16 @@ public class BaiduChart extends AbstractJavaScriptComponent {
         String[] xAxis = (String[])xAxisList.toArray(new String[0]);
         // y axis data
         StringBuilder series = new StringBuilder();
+        String[] colors = new String[]{"rgb(140,159,5)", "rgb(8,42,57)"};
         series.append("series:[");
+        int i=0;
         for(String str : stringMap.keySet()){
             series.append("{name:'" + str + "',"
                     + "type:'bar',"
-                    + "itemStyle:{normal:{color:'rgb(32, 80, 129)'}},"
+                    + "itemStyle:{normal:{color:'" + colors[i] + "'}},"
                     + "data:" + stringMap.get(str).toString() + ","
                     + "markPoint:{data:[{type:'max',name:'Max value'},{type:'min',name:'Min value'}]},markLine:{data:[{type:'average',name:'Average value'}]}},");
+            i+=1;
         }
         series = new StringBuilder(series.substring(0, series.length()-1));
         series.append("]");
